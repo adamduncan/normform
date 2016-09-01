@@ -1,0 +1,26 @@
+{
+  "name": "normform",
+  "version": "1.0.0-beta.0",
+  "author": "Adam Duncan <mail@adamduncandesigns.com>",
+  "description": "Dependency-free HTML5 form validation enhancer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamduncan/normform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adamduncan/normform/issues"
+  },
+  "homepage": "https://github.com/adamduncan/normform#readme",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "form",
+    "validation",
+    "html5",
+    "validity",
+    "aria"
+  ],
+  "license": "MIT"
+}
