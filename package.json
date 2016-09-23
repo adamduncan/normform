@@ -1,6 +1,6 @@
 {
   "name": "normform",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta",
   "author": "Adam Duncan <mail@adamduncandesigns.com>",
   "description": "Dependency-free HTML5 form validation enhancer",
   "repository": {
@@ -20,6 +20,8 @@
     "validation",
     "html5",
     "validity",
+    "validator",
+    "constraint",
     "aria"
   ],
   "license": "MIT"
