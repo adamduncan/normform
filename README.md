@@ -1,2 +1,2 @@
 # NormForm
-Dependency-free HTML5 form validation enhancer
+Simple, dependency-free HTML5 form validation enhancer

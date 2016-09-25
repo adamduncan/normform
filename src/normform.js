@@ -10,7 +10,8 @@ const normform = (function () {
 	const invalidClass = 'normform-invalid';
 	const hasBlurredProp = 'normformHasBlurred';
 	const hasKeyedProp = 'normformHasKeyed';
-	const hasSubmittedProp = 'normformHasSubmitted'; // need to differentiate between attempted submit (validate) and submitted
+	const hasAttemptedSubmitProp = 'normformHasAttemptedSubmit';
+	const hasSubmittedProp = 'normformHasSubmitted';
 
 	const myForms = [].slice.call(document.querySelectorAll(formSelector));
 
@@ -18,6 +19,7 @@ const normform = (function () {
 	myForms.forEach((formEl) => {
     if (formEl.getAttribute(validateOnSumbitAttr) !== 'false') bindFormEvents(formEl);
     bindFormSubmitClick(formEl);
+    formEl[hasAttemptedSubmitProp] = false;
     formEl[hasSubmittedProp] = false;
   });
 
@@ -65,7 +67,7 @@ const normform = (function () {
 	  const isTabOrShiftKey = e.keyCode === 9 || e.keyCode === 16;
 	  
 	  if (isTabOrShiftKey) return;
-	  if (formField[hasBlurredProp] && formField[hasKeyedProp]) {	 // also check for sumbit attempt here 
+	  if ((formField[hasBlurredProp] && formField[hasKeyedProp]) || formField.form[hasAttemptedSubmitProp]) {
 	  	validateField(formField);
 	  }
 	  formField[hasKeyedProp] = true;
@@ -79,7 +81,8 @@ const normform = (function () {
     // http://files.paciellogroup.com/training/commonsamples//validation_feedback/index.html
     returnFocusToFirstInvalid(formEl);
     // bind key/blur events if form submission attempt already made
-    if (!formEl[hasSubmittedProp]) bindFormEvents(formEl);
+    if (!formEl[hasAttemptedSubmitProp]) bindFormEvents(formEl);
+    formEl[hasAttemptedSubmitProp] = true;
 	  e.preventDefault();
 	}
 
@@ -151,7 +154,7 @@ const normform = (function () {
 	}
 
 	function needsValidating(formField) {
-	  return hasPattern(formField) || isFieldRequired(formField);
+		return formField.willValidate && formField.getAttribute('type') !== 'submit';
 	}
 
 	function isFieldValid(formField) {
