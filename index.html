@@ -207,9 +207,9 @@
 				<h2>Why NormForm?</h2>
 				<ul>
 					<li><strong>Progressive enhancement</strong> &mdash; NormForm encourages proper standards-based markup and attributes as a baseline. HTML5 validation APIs already supply a complete system for handling forms. NormForm leverages this to ensure the form will still validate in its absence.</li>
-					<li><strong>Improved user experience</strong> &mdash; User experience and conversion improve when providing feedback at just the right time. Form usage studies (such as Luke W's excellent <em><a href="#">Inline Validation in Web Forms</a></em>) show increases in success and satisfaction when using this approach.</li>
-					<li><strong>HTML-friendly configuration</strong> &mdash; No need to set up complex validation objects in your JavaScript. Keep validation properties in the markup, to make configuration and multi-lingual validation easier.</li>
-					<li><strong>Lightweight</strong> &mdash; compiled scripts clock in at <strong>1kb</strong> minified and gzipped.</li>
+					<li><strong>Improved flow</strong> &mdash; User experience and conversion improve when providing feedback at just the right time. Form usage studies (such as Luke W's excellent <em><a href="#">Inline Validation in Web Forms</a></em>) show increases in success and satisfaction when using this approach.</li>
+					<li><strong>HTML-friendly configuration</strong> &mdash; No need to set up complex validation objects in your JavaScript. Keep validation properties in the markup to make configuration and multi-lingual validation easier.</li>
+					<li><strong>Super lightweight</strong> &mdash; compiled scripts clock in at <strong>1kb</strong> minified and gzipped.</li>
 				</ul>
 			</section>
 			<section class="o-section" id="examples">
@@ -300,7 +300,7 @@
 				<div class="valid-guys">
 					<div class="o-grid ">
 						<div class="o-grid__col col-desk--1-2">
-							<p>When a field becomes valid, it will have the <code>normform-valid</code> classname applied. Handy for positive feedback styles.</p>
+							<p>When a field becomes valid it will have the <code>normform-valid</code> classname applied. Handy for positive feedback styles.</p>
 						</div>
 						<div class="o-grid__col col-desk--1-2">
 							<form class="js-normform" action="" method="POST">
@@ -344,7 +344,7 @@
 				<h3>Error summary</h3>
 				<div class="o-grid">
 					<div class="o-grid__col col-desk--1-2">
-						<p>Create a validation summary by adding a <code>data-normform-summary</code> attribute to the form element. Set its value to the message you&rsquo;d like to display before the error list.</p>
+						<p>To render a validation summary, add the <code>data-normform-summary</code> attribute to the form element. Set its value to the message you&rsquo;d like to display before the error list.</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
 					</div>
@@ -389,7 +389,7 @@
 			<section class="o-section" id="browser-support">
 				<h2>Browser support</h2>
 				<p>NormForm uses sensible, modern JavaScript APIs.</p>
-				<p>NodeList and ES5 Array methods (querySelectorAll, map, filter) help with handling collections. The Constraint Validation API is the real hero here, which recieves support from:</p>
+				<p>NodeList and ES5 Array methods (<code>querySelectorAll</code>, <code>map</code>, <code>filter</code>) help with handling collections. The Constraint Validation API is the real hero here, which receives support from:</p>
 				<ul>
 					<li>Chrome 10+</li>
 					<li>Firefox 4+</li>
@@ -400,7 +400,7 @@
 					<li>Android Browser 4+</li>
 					<li>iOS Safari 4.1+</li>
 				</ul>
-				<p>Looking to support older browsers? The best option would be to polyfill bits with <a href="">es5-shim</a> and <a href="">H5F</a>. This example of <a href="">how to include legacy support for NormForm</a> will get you up and running.</p>
+				<p>Looking to support older browsers? The best option would be to polyfill bits with <a href="">H5F</a>. This example of <a href="">how to include legacy support for NormForm</a> will get you up and running.</p>
 			</section>
 		</main>
 		<footer class="c-footer">
