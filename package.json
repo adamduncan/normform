@@ -11,8 +11,9 @@
     "url": "https://github.com/adamduncan/normform/issues"
   },
   "homepage": "https://github.com/adamduncan/normform#readme",
-  "main": "gulpfile.js",
+  "main": "src/normform.js",
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -24,5 +25,11 @@
     "constraint",
     "aria"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^0.36.1",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1"
+  }
 }

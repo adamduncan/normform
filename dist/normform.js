@@ -1,6 +1,10 @@
-'use strict';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.normform = factory());
+}(this, (function () { 'use strict';
 
-const normform = (function () {
+const normform = function () {
 
   const formSelector = '.js-normform';
   const validationFeedbackAttr = 'data-normform-feedback-for';
@@ -16,7 +20,7 @@ const normform = (function () {
   const myForms = [].slice.call(document.querySelectorAll(formSelector));
 
   // INIT
-  myForms.forEach((formEl) => {
+  myForms.forEach(formEl => {
     if (formEl.getAttribute(validateOnSumbitAttr) !== 'false') bindFormEvents(formEl);
     bindFormSubmitClick(formEl);
     formEl[hasAttemptedSubmitProp] = false;
@@ -25,12 +29,9 @@ const normform = (function () {
 
   return myForms;
 
-
   // BINDINGS
   function bindFormEvents(formEl) {
-    const handledFields = [].slice.call(formEl.elements)
-      .filter(formField => needsValidating(formField))
-      .map(formField => bindFieldEvents(formField));
+    const handledFields = [].slice.call(formEl.elements).filter(formField => needsValidating(formField)).map(formField => bindFieldEvents(formField));
   }
 
   function bindFieldEvents(formField) {
@@ -51,7 +52,6 @@ const normform = (function () {
     formEl.querySelector('[type="submit"]').addEventListener('click', formSubmitHandler);
   }
 
-
   // HANDLERS
   function fieldBlurHandler(e) {
     const formField = e.currentTarget || e.target;
@@ -67,7 +67,7 @@ const normform = (function () {
     const isTabOrShiftKey = e.keyCode === 9 || e.keyCode === 16;
 
     if (isTabOrShiftKey) return;
-    if ((formField[hasBlurredProp] && formField[hasKeyedProp]) || formField.form[hasAttemptedSubmitProp]) {
+    if (formField[hasBlurredProp] && formField[hasKeyedProp] || formField.form[hasAttemptedSubmitProp]) {
       validateField(formField);
     }
     formField[hasKeyedProp] = true;
@@ -85,7 +85,6 @@ const normform = (function () {
     formEl[hasAttemptedSubmitProp] = true;
     e.preventDefault();
   }
-
 
   // ACTIONS
   function validateForm(formEl) {
@@ -114,7 +113,7 @@ const normform = (function () {
 
   function toggleValidity(formField) {
     // toggle valid/invalid classes on parent if checkbox/radio set, otherwise input itself
-    const targetEl = (isPartOfToggleSet(formField)) ? formField.form.querySelector(`[for="${formField.id}"]`).parentNode : formField;
+    const targetEl = isPartOfToggleSet(formField) ? formField.form.querySelector(`[for="${ formField.id }"]`).parentNode : formField;
     if (!isFieldValid(formField)) {
       formField.setAttribute('aria-invalid', true);
       targetEl.classList.add(invalidClass);
@@ -128,9 +127,9 @@ const normform = (function () {
 
   function updateValidationMsg(formField) {
     const thisForm = formField.form;
-    const inputId = (isPartOfToggleSet(formField)) ? formField.getAttribute('name') : formField.getAttribute('id');
-    const validationEl = thisForm.querySelector(`[${validationFeedbackAttr}="${inputId}"]`);
-    const validationMsg = (!isFieldValid(formField)) ? validationEl.getAttribute(validationErrorMsgAttr) || formField.validationMessage : '';
+    const inputId = isPartOfToggleSet(formField) ? formField.getAttribute('name') : formField.getAttribute('id');
+    const validationEl = thisForm.querySelector(`[${ validationFeedbackAttr }="${ inputId }"]`);
+    const validationMsg = !isFieldValid(formField) ? validationEl.getAttribute(validationErrorMsgAttr) || formField.validationMessage : '';
     // keep validation text and custom validity in sync
     if (validationEl) validationEl.textContent = validationMsg;
     // formField.setCustomValidity(validationMsg);
@@ -142,7 +141,6 @@ const normform = (function () {
       invalidFields[0].focus();
     }
   }
-
 
   // HELPERS
   function hasPattern(formField) {
@@ -158,14 +156,15 @@ const normform = (function () {
   }
 
   function isFieldValid(formField) {
-    return !![].slice.call(formField.form.querySelectorAll(`[name="${formField.getAttribute('name')}"]`)).filter(formField => formField.validity.valid).length;
+    return !![].slice.call(formField.form.querySelectorAll(`[name="${ formField.getAttribute('name') }"]`)).filter(formField => formField.validity.valid).length;
   }
 
   function isPartOfToggleSet(formField) {
     const formFieldType = formField.getAttribute('type');
     return formFieldType === 'checkbox' || formFieldType === 'radio';
   }
+}();
 
-})();
+return normform;
 
-export default normform;
+})));
