@@ -22,10 +22,11 @@
 		body {
 			background-color: #eee;
 			color: #333;
-			font-family: Inconsolata, 'Courier New', Courier, monospace;
+			font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+			/*font-family: Inconsolata, 'Courier New', Courier, monospace;*/
 			font-size: 100%; /* 16px */
 			height: 100%;
-			line-height: 1.25; /* 20px */
+			line-height: 1.625; /* 26px */
 			margin: 0;
 		}
 
@@ -40,10 +41,88 @@
 			text-shadow: none;
 		}
 
+
+		h1 {
+			font-size: 3em;
+			margin: 0;
+		}
+		h2 {
+			font-size: 1.625em;
+			margin: 0 0 0.6em;
+		}
+		h3 {
+			margin: 0 0 0;
+		}
+		:not(h2) + h3:not(:first-child) {
+			padding-top: 1em;
+		}
+
+		p {
+			margin: 0 0 1em;
+		}
+		p, ul {
+			font-size: 1rem;
+			max-width: 32rem;
+		}
+		ul {
+			padding-left: 1em;
+		}
+		ul:not([class]) li {
+			margin-bottom: 0.5em;
+		}
+
+		a {
+			background-image: linear-gradient(to right, currentColor 0%, currentColor 100%);
+			background-position: bottom center;
+			background-repeat: repeat-x;
+			background-size: 100% 0.063em;
+			color: #35b1a1;
+			cursor: pointer;
+			text-decoration: none;
+			text-shadow: 0.063em 0.063em 0 #eee, -0.063em 0.063em 0 #eee;
+			transition: color 250ms;
+		}
+		a:hover,
+		a:focus {
+			color: #333;
+		}
+
+		code, pre {
+			background-color: #f5f5f5;
+			border-radius: 0.125rem;
+			padding: 0.25em;
+		}
+		pre {
+			display: inline-block;
+			margin: 0.5rem 0 1rem;
+			overflow: auto;
+			padding: 1rem;
+			tab-size: 4;
+			width: 100%;
+		}
+		pre:last-child {
+			margin-bottom: 0;
+		}
+		@media (min-width: 40em) {
+			pre {
+				margin: 1rem 0 2rem;
+				min-width: 32rem;
+				width: auto;
+			}
+		}
+
+
+		.c-container {
+			font-size: 1rem;
+		}
+		@media (min-width: 75em) {
+			font-size: 1.25rem;
+		}
+
 		.o-wrapper {
 			margin: 0;
-			max-width: 72rem;
-			padding: 0 5%;
+			max-width: 80rem;
+			padding: 0 7%;
 		}
 
 		@media (min-width: 40em) {
@@ -71,18 +150,43 @@
 			}
 		}
 
-		.c-header,
 		.c-footer,
 		.o-section {
 			padding: 1rem 0;
 		}
+		@media (min-width: 40em) {
+			.c-footer,
+			.o-section {
+				padding: 2rem 0;
+			}
+		}
+		.c-example {
+			margin-bottom: 3rem;
+		}
 
-		p, ul {
-			max-width: 30em;
+		.c-header {
+			padding: 2em 0;
+		}
+		.c-header__intro {
+			font-size: 1.25em;
+		}
+
+		.c-footer {
+			background-color: #333;
+			margin-top: 2rem;
+		}
+		.c-footer__link {
+			color: #ccc;
+			margin-right: 2em;
+			text-shadow: 0.063em 0.063em 0 #333, -0.063em 0.063em 0 #333;
+		}
+		.c-footer__link:hover,
+		.c-footer__link:focus {
+			color: #eee;
 		}
 
 		.form-field {
-			margin-bottom: 1rem;
+			margin: 0 0 1rem;
 			position: relative;
 		}
 		label {
@@ -114,23 +218,23 @@
 			transition: opacity 250ms ease-out;
 		}
 		.normform-invalid {
-			border-color: #E63946;
+			border-color: #e63946;
 		}
 		.normform-invalid:focus {
-			box-shadow: 0 0 2px 0 #E63946;
+			box-shadow: 0 0 2px 0 #e63946;
 		}
 		.normform-invalid ~ .validation-msg,
 		.normform-invalid .validation-msg {
 			color: #e63946;
 			opacity: 1;
 		}
-		/* valid guys (scoping for now, separate in demos) */
-		.valid-guys .normform-valid,
-		.valid-guys .normform-valid ~ [type] {
+		/* valid marked (scoping for now, separate in demos) */
+		.valid-marked .normform-valid,
+		.valid-marked .normform-valid ~ [type] {
 			border-color: #35b1a1;
 		}
-		.valid-guys .normform-valid ~ .validation-msg,
-		.valid-guys .normform-valid .validation-msg {
+		.valid-marked .normform-valid ~ .validation-msg,
+		.valid-marked .normform-valid .validation-msg {
 			background-color: #35b1a1;
 			border-radius: 50%;
 			display: block;
@@ -142,13 +246,15 @@
 			width: 1.25rem;
 		}
 	</style>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" media="none" onload="if(media!='all')media='all'">
+	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700"></noscript>
 	<script>(function(d) { d.className = d.className.replace(/\bno-js/, 'js'); })(document.documentElement);</script>
-	<link href="//www.google-analytics.com" rel="dns-prefetch"/>
+	<link href="//www.google-analytics.com" rel="dns-prefetch">
 	<!-- <link rel="shortcut icon" href="icon-touch.png">
 	<link rel="apple-touch-icon-precomposed" href="icon-touch.png"> -->
 </head>
 <body>
-	<div class="c-conatiner">
+	<div class="c-container">
 		<header class="c-header">
 			<div class="o-wrapper">
 				<h1 class="c-header__title">NormForm</h1>
@@ -178,7 +284,7 @@
 				<p>NormForm will be available to import into your project using ES2015 module syntax:</p>
 				<pre>import normform from 'normform';</pre>
 				<h3>Download</h3>
-				<p>Grab a distribution copy of <a href="">normform.min.js</a>. Reference it before the closing <code>&lt;body&gt;</code> tag at the end of your document:</p>
+				<p>Grab a distribution copy of <a href="http://github.com/adamduncan/normform/dist/normform.min.js">normform.min.js</a>. Reference it before the closing <code>&lt;body&gt;</code> tag at the end of your document, or ensure it has an <code>async</code> attribute:</p>
 				<pre>&lt;script src="/path/to/normform.min.js" async&gt;&lt;script&gt;</pre>
 			</section>
 			<section class="o-section" id="usage">
@@ -186,37 +292,35 @@
 				<p>NormForm is self-initialising, so no need to do any scripting tomfoolery beyond the above.</p>
 				<h3>Get started</h3>
 				<p>First, author a world-class HTML form with the appropriate elements and attributes. Add the <code>js-normform</code> class to the form tag to get things going:</p>
-<pre>
-&lt;form class="js-normform"&gt;
+<pre><code>&lt;form class="js-normform"&gt;
 	...
 &lt;/form&gt;
-</pre>
+</code></pre>
 				<h3>Validating inputs</h3>
 				<p>Inputs that need validation are automatically handled by NormForm.</p>
 				<p>Include an empty <code>&lt;span&gt;</code> element alongside each input. This will become the container to hold the validation feedback. This is bound to the relevant input by including the <code>data-normform-feedback-for</code> attribute. Its value needs to match the input id (the same way you&rsquo;d bind a label to its respective input).</p>
-<pre>
-&lt;div class="form-field"&gt;
+<pre><code>&lt;div class="form-field"&gt;
 	&lt;label for="full-name"&gt;Full Name&l;/label&gt;
 	&lt;input type="text" id="full-name" name="full-name" required&gt;
 	&lt;span data-normform-feedback-for="full-name"&gt;&lt;/span&gt;
 &lt;/div&gt;
-</pre>
+</code></pre>
 				<p>That&rsquo;s it. The form will validate as expected, with a few bonus enhancements.</p>
 			</section>
 			<section class="o-section" id="why">
 				<h2>Why NormForm?</h2>
 				<ul>
-					<li><strong>Progressive enhancement</strong> &mdash; NormForm encourages proper standards-based markup and attributes as a baseline. HTML5 validation APIs already supply a complete system for handling forms. NormForm leverages this to ensure the form will still validate in its absence.</li>
-					<li><strong>Improved flow</strong> &mdash; User experience and conversion improve when providing feedback at just the right time. Form usage studies (such as Luke W's excellent <em><a href="#">Inline Validation in Web Forms</a></em>) show increases in success and satisfaction when using this approach.</li>
+					<li><strong>Progressive enhancement</strong> &mdash; NormForm encourages proper standards-based markup and attributes as a baseline. HTML5 validation APIs already supply a complete system for handling forms client-side. NormForm leverages this to ensure the form will still run validation in its absence.</li>
+					<li><strong>Improved flow</strong> &mdash; User experience and conversion improve when providing feedback at just the right time. Form usage studies (such as Baymard&rsquo;s <em><a href="#">Usability testing of Inline Validation</a></em> and Luke W&rsquo;s excellent <em><a href="#">Inline Validation in Web Forms</a></em>) show increases in success and satisfaction when using this approach.</li>
 					<li><strong>HTML-friendly configuration</strong> &mdash; No need to set up complex validation objects in your JavaScript. Keep validation properties in the markup to make configuration and multi-lingual validation easier.</li>
-					<li><strong>Super lightweight</strong> &mdash; compiled scripts clock in at <strong>1kb</strong> minified and gzipped.</li>
+					<li><strong>Super lightweight</strong> &mdash; script clocks in at <strong>1.24kb</strong> minified and gzipped.</li>
 				</ul>
 			</section>
 			<section class="o-section" id="examples">
 				<h2>Examples</h2>
-				<h3>Simple form validation</h3>
-				<div class="o-grid">
+				<div class="o-grid c-example">
 					<div class="o-grid__col col-desk--1-2">
+						<h3>Simple form validation</h3>
 						<p>Out-of-the-box, validate as you go implementation. The <code>normform-invalid</code> class is added to invalid inputs (or their parent if a fieldset of radio or checkbox inputs).</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
@@ -271,17 +375,17 @@
 						  </form>
 					</div>
 				</div>
-				<h3>HTML5 input types</h3>
-				<div class="o-grid">
+				<div class="o-grid c-example">
 					<div class="o-grid__col col-desk--1-2">
+						<h3>HTML5 input types</h3>
 						<p>HTML5 introduced purpose-built input types like url, date and tel. Use them! NormForm backs up native input type validation.</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
 					</div>
 				</div>
-				<h3>Pattern matching</h3>
-				<div class="o-grid">
+				<div class="o-grid c-example">
 					<div class="o-grid__col col-desk--1-2">
+						<h3>Pattern matching</h3>
 						<p>Use <code>pattern</code> attribute to validate against particular formats.</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
@@ -295,11 +399,11 @@
 						  </form>
 					</div>
 				</div>
-				<h3>Marking items as valid</h3>
 				<!-- temp-->
-				<div class="valid-guys">
-					<div class="o-grid ">
+				<div class="valid-marked">
+					<div class="o-grid c-example">
 						<div class="o-grid__col col-desk--1-2">
+							<h3>Marking items as valid</h3>
 							<p>When a field becomes valid it will have the <code>normform-valid</code> classname applied. Handy for positive feedback styles.</p>
 						</div>
 						<div class="o-grid__col col-desk--1-2">
@@ -314,9 +418,9 @@
 						</div>
 					</div>
 				</div>
-				<h3>Custom error messages</h3>
-				<div class="o-grid">
+				<div class="o-grid c-example">
 					<div class="o-grid__col col-desk--1-2">
+						<h3>Custom error messages</h3>
 						<p>Add custom field validation messages by setting the <code>data-normform-error-message</code> attribute on the <code>data-normform-feedback-for</code> element.</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
@@ -341,17 +445,17 @@
 					  </form>
 					</div>
 				</div>
-				<h3>Error summary</h3>
-				<div class="o-grid">
+				<div class="o-grid c-example">
 					<div class="o-grid__col col-desk--1-2">
+						<h3>Error summary</h3>
 						<p>To render a validation summary, add the <code>data-normform-summary</code> attribute to the form element. Set its value to the message you&rsquo;d like to display before the error list.</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
 					</div>
 				</div>
-				<h3>Validate on submit</h3>
-				<div class="o-grid">
+				<div class="o-grid c-example">
 					<div class="o-grid__col col-desk--1-2">
+						<h3>Validate on submit</h3>
 						<p>Delay validation by adding <code>data-normform-async="false"</code> to the form element. Validating on submit is the browser&rsquo;s default behaviour, but it lacks real-time feedback.</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
@@ -376,9 +480,9 @@
 					</div>
 				</div>
 				<!--<div style="opacity: 0.3">
-					<h3>Extending: Matching multiple inputs (coming soon)</h3>
 					<div class="o-grid">
 						<div class="o-grid__col col-desk--1-2">
+							<h3>Extending: Matching multiple inputs (coming soon)</h3>
 							<p>Extend behaviour by writing custom validations that leverage NormForm <code>validate()</code> and <code>isValid()</code> methods.</p>
 						</div>
 						<div class="o-grid__col col-desk--1-2">
@@ -400,13 +504,13 @@
 					<li>Android Browser 4+</li>
 					<li>iOS Safari 4.1+</li>
 				</ul>
-				<p>Looking to support older browsers? The best option would be to polyfill bits with <a href="">H5F</a>. This example of <a href="">how to include legacy support for NormForm</a> will get you up and running.</p>
+				<p>Looking to support older browsers? The best option would be to polyfill these bits with <a href="">es5-shim</a> and <a href="">H5F</a>. This example of <a href="">how to include legacy support for NormForm</a> will get you up and running.</p>
 			</section>
 		</main>
 		<footer class="c-footer">
 			<div class="o-wrapper">
 				<a class="c-footer__link" href="http://github.com/adamduncan/normform">Get NormForm on Github</a>
-				<a class="c-footer__link" href="http://twitter.com/duncanadam">@duncanadam</a>
+				<a class="c-footer__link" href="http://twitter.com/duncanadam"><span aria-hidden="true">@</span>duncanadam <span class="u-visually-hidden">on Twitter</span></a>
 			</div>
 		</footer>
 	</div>
@@ -415,7 +519,7 @@
 		var demoMode = true;
 	</script>
 
-	<script src="dist/normform.js"></script>
+	<script src="dist/normform.min.js"></script>
 
 	<script>
 		// give form submission feedback

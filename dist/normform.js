@@ -4,23 +4,23 @@
   (global.normform = factory());
 }(this, (function () { 'use strict';
 
-const normform = function () {
+var normform = function () {
 
-  const formSelector = '.js-normform';
-  const validationFeedbackAttr = 'data-normform-feedback-for';
-  const validationErrorMsgAttr = 'data-normform-error-message';
-  const validateOnSumbitAttr = 'data-normform-async';
-  const validClass = 'normform-valid';
-  const invalidClass = 'normform-invalid';
-  const hasBlurredProp = 'normformHasBlurred';
-  const hasKeyedProp = 'normformHasKeyed';
-  const hasAttemptedSubmitProp = 'normformHasAttemptedSubmit';
-  const hasSubmittedProp = 'normformHasSubmitted';
+  var formSelector = '.js-normform';
+  var validationFeedbackAttr = 'data-normform-feedback-for';
+  var validationErrorMsgAttr = 'data-normform-error-message';
+  var validateOnSumbitAttr = 'data-normform-async';
+  var validClass = 'normform-valid';
+  var invalidClass = 'normform-invalid';
+  var hasBlurredProp = 'normformHasBlurred';
+  var hasKeyedProp = 'normformHasKeyed';
+  var hasAttemptedSubmitProp = 'normformHasAttemptedSubmit';
+  var hasSubmittedProp = 'normformHasSubmitted';
 
-  const myForms = [].slice.call(document.querySelectorAll(formSelector));
+  var myForms = [].slice.call(document.querySelectorAll(formSelector));
 
   // INIT
-  myForms.forEach(formEl => {
+  myForms.forEach(function (formEl) {
     if (formEl.getAttribute(validateOnSumbitAttr) !== 'false') bindFormEvents(formEl);
     bindFormSubmitClick(formEl);
     formEl[hasAttemptedSubmitProp] = false;
@@ -31,7 +31,11 @@ const normform = function () {
 
   // BINDINGS
   function bindFormEvents(formEl) {
-    const handledFields = [].slice.call(formEl.elements).filter(formField => needsValidating(formField)).map(formField => bindFieldEvents(formField));
+    var handledFields = [].slice.call(formEl.elements).filter(function (formField) {
+      return needsValidating(formField);
+    }).map(function (formField) {
+      return bindFieldEvents(formField);
+    });
   }
 
   function bindFieldEvents(formField) {
@@ -54,7 +58,7 @@ const normform = function () {
 
   // HANDLERS
   function fieldBlurHandler(e) {
-    const formField = e.currentTarget || e.target;
+    var formField = e.currentTarget || e.target;
 
     formField[hasBlurredProp] = true;
     if (formField[hasKeyedProp]) {
@@ -63,8 +67,8 @@ const normform = function () {
   }
 
   function fieldKeyupChangeHandler(e) {
-    const formField = e.currentTarget || e.target;
-    const isTabOrShiftKey = e.keyCode === 9 || e.keyCode === 16;
+    var formField = e.currentTarget || e.target;
+    var isTabOrShiftKey = e.keyCode === 9 || e.keyCode === 16;
 
     if (isTabOrShiftKey) return;
     if (formField[hasBlurredProp] && formField[hasKeyedProp] || formField.form[hasAttemptedSubmitProp]) {
@@ -74,7 +78,7 @@ const normform = function () {
   }
 
   function formSubmitHandler(e) {
-    const formEl = e.currentTarget.form;
+    var formEl = e.currentTarget.form;
     validateForm(formEl);
     // returning focus to first invalid field in form for now
     // will replace this with shifting focus to form summary when complete
@@ -90,8 +94,14 @@ const normform = function () {
   function validateForm(formEl) {
     // should be able to formEl.checkValidity() here, but a set of required checkbox/radio inputs gives false negative
     // if (!formEl.checkValidity()) {
-    const validatedFields = [].slice.call(formEl.elements).filter(formField => needsValidating(formField)).map(formField => validateField(formField));
-    const invalidFields = validatedFields.filter(formField => !isFieldValid(formField));
+    var validatedFields = [].slice.call(formEl.elements).filter(function (formField) {
+      return needsValidating(formField);
+    }).map(function (formField) {
+      return validateField(formField);
+    });
+    var invalidFields = validatedFields.filter(function (formField) {
+      return !isFieldValid(formField);
+    });
     // instead manually check for invalids before submitting
     if (!invalidFields.length) submitForm(formEl);
     // }
@@ -113,7 +123,7 @@ const normform = function () {
 
   function toggleValidity(formField) {
     // toggle valid/invalid classes on parent if checkbox/radio set, otherwise input itself
-    const targetEl = isPartOfToggleSet(formField) ? formField.form.querySelector(`[for="${ formField.id }"]`).parentNode : formField;
+    var targetEl = isPartOfToggleSet(formField) ? formField.form.querySelector('[for="' + formField.id + '"]').parentNode : formField;
     if (!isFieldValid(formField)) {
       formField.setAttribute('aria-invalid', true);
       targetEl.classList.add(invalidClass);
@@ -126,17 +136,21 @@ const normform = function () {
   }
 
   function updateValidationMsg(formField) {
-    const thisForm = formField.form;
-    const inputId = isPartOfToggleSet(formField) ? formField.getAttribute('name') : formField.getAttribute('id');
-    const validationEl = thisForm.querySelector(`[${ validationFeedbackAttr }="${ inputId }"]`);
-    const validationMsg = !isFieldValid(formField) ? validationEl.getAttribute(validationErrorMsgAttr) || formField.validationMessage : '';
+    var thisForm = formField.form;
+    var inputId = isPartOfToggleSet(formField) ? formField.getAttribute('name') : formField.getAttribute('id');
+    var validationEl = thisForm.querySelector('[' + validationFeedbackAttr + '="' + inputId + '"]');
+    var validationMsg = !isFieldValid(formField) ? validationEl.getAttribute(validationErrorMsgAttr) || formField.validationMessage : '';
     // keep validation text and custom validity in sync
     if (validationEl) validationEl.textContent = validationMsg;
     // formField.setCustomValidity(validationMsg);
   }
 
   function returnFocusToFirstInvalid(formEl) {
-    const invalidFields = [].slice.call(formEl.elements).filter(formField => needsValidating(formField)).filter(formField => !isFieldValid(formField));
+    var invalidFields = [].slice.call(formEl.elements).filter(function (formField) {
+      return needsValidating(formField);
+    }).filter(function (formField) {
+      return !isFieldValid(formField);
+    });
     if (invalidFields.length) {
       invalidFields[0].focus();
     }
@@ -156,11 +170,13 @@ const normform = function () {
   }
 
   function isFieldValid(formField) {
-    return !![].slice.call(formField.form.querySelectorAll(`[name="${ formField.getAttribute('name') }"]`)).filter(formField => formField.validity.valid).length;
+    return !![].slice.call(formField.form.querySelectorAll('[name="' + formField.getAttribute('name') + '"]')).filter(function (formField) {
+      return formField.validity.valid;
+    }).length;
   }
 
   function isPartOfToggleSet(formField) {
-    const formFieldType = formField.getAttribute('type');
+    var formFieldType = formField.getAttribute('type');
     return formFieldType === 'checkbox' || formFieldType === 'radio';
   }
 }();
