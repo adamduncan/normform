@@ -187,6 +187,26 @@
 			color: #eee;
 		}
 
+
+		.pen-embed {
+			overflow: hidden;
+			position: relative;
+		}
+		.pen-embed::after {
+			background-color: #eee;
+			bottom: 0;
+			content: '';
+			height: 0.625em;
+			position: absolute;
+			left: 0;
+			width: 100%;
+		}
+		.pen-embed > * {
+			margin: -1px 0 0 -1px;
+			width: calc(100% + 2px);
+		}
+
+
 		.u-visually-hidden {
 			border: 0;
 			clip: rect(0 0 0 0);
@@ -327,8 +347,10 @@
 						    </div>
 						    <button class="button" type="submit">Submit</button>
 						  </form> -->
-						<p data-height="600" data-theme-id="dark" data-slug-hash="dpVOka" data-default-tab="result" data-user="adamduncan" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/adamduncan/pen/dpVOka/">NormForm: Simple form validation</a> by Adam Duncan (<a href="http://codepen.io/adamduncan">@adamduncan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-						<script async src="https://assets.codepen.io/assets/embed/ei.js"></script>
+						<div class="pen-embed">
+							<p data-height="600" data-theme-id="dark" data-slug-hash="dpVOka" data-default-tab="result" data-user="adamduncan" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/adamduncan/pen/dpVOka/">NormForm: Simple form validation</a> by Adam Duncan (<a href="http://codepen.io/adamduncan">@adamduncan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+							<script async src="https://assets.codepen.io/assets/embed/ei.js"></script>
+						</div>
 					</div>
 				</div>
 				<div class="o-grid c-example">
