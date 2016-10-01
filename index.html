@@ -23,7 +23,6 @@
 			background-color: #eee;
 			color: #333;
 			font-family: 'PT Sans', Helvetica, Arial, sans-serif;
-			/*font-family: Inconsolata, 'Courier New', Courier, monospace;*/
 			font-size: 100%; /* 16px */
 			height: 100%;
 			line-height: 1.625; /* 26px */
@@ -42,6 +41,9 @@
 		}
 
 
+		h1, h2, h3 {
+			text-rendering: optimizeLegibility;
+		}
 		h1 {
 			font-size: 3em;
 			margin: 0;
@@ -185,20 +187,6 @@
 			color: #eee;
 		}
 
-		.form-field {
-			margin: 0 0 1rem;
-			position: relative;
-		}
-		label {
-			display: block;
-		}
-		input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]),
-		select,
-		textarea {
-			display: block;
-			width: 100%;
-		}
-
 		.u-visually-hidden {
 			border: 0;
 			clip: rect(0 0 0 0);
@@ -209,47 +197,12 @@
 			position: absolute;
 			width: 1px;
 		}
-
-		/*-------------------------------
-			VALIDATION STYLES
-		-------------------------------*/
-		.validation-msg {
-			opacity: 0;
-			transition: opacity 250ms ease-out;
-		}
-		.normform-invalid {
-			border-color: #e63946;
-		}
-		.normform-invalid:focus {
-			box-shadow: 0 0 2px 0 #e63946;
-		}
-		.normform-invalid ~ .validation-msg,
-		.normform-invalid .validation-msg {
-			color: #e63946;
-			opacity: 1;
-		}
-		/* valid marked (scoping for now, separate in demos) */
-		.valid-marked .normform-valid,
-		.valid-marked .normform-valid ~ [type] {
-			border-color: #35b1a1;
-		}
-		.valid-marked .normform-valid ~ .validation-msg,
-		.valid-marked .normform-valid .validation-msg {
-			background-color: #35b1a1;
-			border-radius: 50%;
-			display: block;
-			height: 1.25rem;
-			opacity: 1;
-			position: absolute;
-			right: -2.5rem;
-			top: 0;
-			width: 1.25rem;
-		}
 	</style>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" media="none" onload="if(media!='all')media='all'">
 	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700"></noscript>
 	<script>(function(d) { d.className = d.className.replace(/\bno-js/, 'js'); })(document.documentElement);</script>
 	<link href="//www.google-analytics.com" rel="dns-prefetch">
+	<link href="//fonts.gstatic.com" rel="dns-prefetch">
 	<!-- <link rel="shortcut icon" href="icon-touch.png">
 	<link rel="apple-touch-icon-precomposed" href="icon-touch.png"> -->
 </head>
@@ -276,6 +229,7 @@
 						<p>[vs NormForm enhanced]</p>
 					</div>
 				</div>
+				<p>All set? <a href="#examples">Jump straight to the examples</a>.</p>
 			</section>
 			<section class="o-section" id="install">
 				<h2>Install</h2>
@@ -284,7 +238,7 @@
 				<p>NormForm will be available to import into your project using ES2015 module syntax:</p>
 				<pre>import normform from 'normform';</pre>
 				<h3>Download</h3>
-				<p>Grab a distribution copy of <a href="http://github.com/adamduncan/normform/dist/normform.min.js">normform.min.js</a>. Reference it before the closing <code>&lt;body&gt;</code> tag at the end of your document, or ensure it has an <code>async</code> attribute:</p>
+				<p>Grab a distribution copy of <a href="https://github.com/adamduncan/normform/blob/master/dist/normform.min.js">normform.min.js</a>. Reference it before the closing <code>&lt;body&gt;</code> tag at the end of your document, or ensure it has an <code>async</code> attribute:</p>
 				<pre>&lt;script src="/path/to/normform.min.js" async&gt;&lt;script&gt;</pre>
 			</section>
 			<section class="o-section" id="usage">
@@ -311,9 +265,9 @@
 				<h2>Why NormForm?</h2>
 				<ul>
 					<li><strong>Progressive enhancement</strong> &mdash; NormForm encourages proper standards-based markup and attributes as a baseline. HTML5 validation APIs already supply a complete system for handling forms client-side. NormForm leverages this to ensure the form will still run validation in its absence.</li>
-					<li><strong>Improved flow</strong> &mdash; User experience and conversion improve when providing feedback at just the right time. Form usage studies (such as Baymard&rsquo;s <em><a href="#">Usability testing of Inline Validation</a></em> and Luke W&rsquo;s excellent <em><a href="#">Inline Validation in Web Forms</a></em>) show increases in success and satisfaction when using this approach.</li>
+					<li><strong>Improved flow</strong> &mdash; User experience and conversion improve when providing feedback at just the right time. Form usage studies (such as Baymard&rsquo;s <em><a href="http://baymard.com/blog/inline-form-validation">Usability testing of Inline Validation</a></em> and Luke W&rsquo;s excellent <em><a href="http://alistapart.com/article/inline-validation-in-web-forms">Inline Validation in Web Forms</a></em>) show increases in success and satisfaction when using this approach.</li>
 					<li><strong>HTML-friendly configuration</strong> &mdash; No need to set up complex validation objects in your JavaScript. Keep validation properties in the markup to make configuration and multi-lingual validation easier.</li>
-					<li><strong>Super lightweight</strong> &mdash; script clocks in at <strong>1.24kb</strong> minified and gzipped.</li>
+					<li><strong>Super lightweight</strong> &mdash; script clocks in at <strong>2kb</strong> minified and gzipped.</li>
 				</ul>
 			</section>
 			<section class="o-section" id="examples">
@@ -324,7 +278,7 @@
 						<p>Out-of-the-box, validate as you go implementation. The <code>normform-invalid</code> class is added to invalid inputs (or their parent if a fieldset of radio or checkbox inputs).</p>
 					</div>
 					<div class="o-grid__col col-desk--1-2">
-						<form class="js-normform" action="" method="POST">
+						<!-- <form class="js-normform" action="" method="POST">
 						    <div class="form-field">
 						      <label class="label" for="name">Name</label>
 						      <input class="text-input" type="text" id="name" name="user_name" required />
@@ -372,7 +326,9 @@
 						      <textarea class="textarea text-input" id="msg" name="user_message"></textarea>
 						    </div>
 						    <button class="button" type="submit">Submit</button>
-						  </form>
+						  </form> -->
+						<p data-height="600" data-theme-id="dark" data-slug-hash="dpVOka" data-default-tab="result" data-user="adamduncan" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/adamduncan/pen/dpVOka/">NormForm: Simple form validation</a> by Adam Duncan (<a href="http://codepen.io/adamduncan">@adamduncan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+						<script async src="https://assets.codepen.io/assets/embed/ei.js"></script>
 					</div>
 				</div>
 				<div class="o-grid c-example">

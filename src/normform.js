@@ -13,6 +13,8 @@ const normform = (function () {
   const hasAttemptedSubmitProp = 'normformHasAttemptedSubmit';
   const hasSubmittedProp = 'normformHasSubmitted';
 
+  let demoMode = demoMode || false;
+
   const myForms = [].slice.call(document.querySelectorAll(formSelector));
 
   // INIT
